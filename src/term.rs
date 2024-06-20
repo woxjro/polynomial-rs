@@ -79,6 +79,35 @@ impl Div for Term {
 
 impl std::fmt::Display for Term {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "{}x^{}", self.coefficient, self.degree)
+        let s = if self.degree == 0 {
+            if self.coefficient == 1 {
+                "1".to_string()
+            } else if self.coefficient == -1 {
+                "-1".to_string()
+            } else {
+                format!("{}", self.coefficient)
+            }
+        } else if self.degree == 1 {
+            if self.coefficient == 1 {
+                "x".to_string()
+            } else if self.coefficient == -1 {
+                "-x".to_string()
+            } else {
+                format!("{}x", self.coefficient)
+            }
+        } else {
+            format!(
+                "{}x^{}",
+                if self.coefficient == 1 {
+                    "".to_string()
+                } else if self.coefficient == -1 {
+                    "-".to_string()
+                } else {
+                    self.coefficient.to_string()
+                },
+                self.degree
+            )
+        };
+        write!(f, "{}", s)
     }
 }

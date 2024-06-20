@@ -22,7 +22,7 @@ fn main() {
     // multiplying two polynomials
     // x^99 + x^98 + ... + x^1 + x^0
     let lhs = Polynomial::from((0..100).map(|_| 1).collect::<Vec<i32>>());
-    // x + 1
+    // x - 1
     let rhs = Polynomial::from(vec![1, -1]);
 
     // x^100 - 1

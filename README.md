@@ -25,12 +25,18 @@ fn main() {
     println!("{}", lhs - rhs);
 
     // multiplying two polynomials
-    // x^4 + x^3 + x^2 + x + 1
+    // x^99 + x^98 + ... + x^1 + x^0
     let lhs = Polynomial::from((0..100).map(|_| 1).collect::<Vec<i32>>());
-    // x + 1
+    // x - 1
     let rhs = Polynomial::from(vec![1, -1]);
 
     // x^100 - 1
     println!("{}", lhs * rhs);
 }
 ```
+
+## Future Work
+
+- [ ] Polymorphism for different types
+- [ ] Multiply polynomial by a scalar
+- [ ] Divide polynomial by a scalar

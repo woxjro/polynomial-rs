@@ -118,14 +118,26 @@ impl Polynomial {
 impl std::fmt::Display for Polynomial {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         let mut sorted_polynomial = self.clone();
-        sorted_polynomial.sort();
-        let s = sorted_polynomial
+        sorted_polynomial.uniqify();
+
+        let mut s = String::new();
+
+        let mut iter = sorted_polynomial
             .terms
             .iter()
             .filter(|term| term.coefficient != 0)
-            .map(|term| term.to_string())
-            .collect::<Vec<String>>()
-            .join(" + ");
+            .peekable();
+
+        while let Some(term) = iter.next() {
+            if let Some(next_term) = iter.peek() {
+                s.push_str(&format!(
+                    "{term}{}",
+                    if next_term.coefficient > 0 { "+" } else { "" }
+                ));
+            } else {
+                s.push_str(&format!("{term}"));
+            }
+        }
         write!(f, "{}", s)
     }
 }
