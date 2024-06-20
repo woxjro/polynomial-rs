@@ -122,6 +122,7 @@ impl std::fmt::Display for Polynomial {
         let s = sorted_polynomial
             .terms
             .iter()
+            .filter(|term| term.coefficient != 0)
             .map(|term| term.to_string())
             .collect::<Vec<String>>()
             .join(" + ");
