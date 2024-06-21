@@ -14,7 +14,7 @@ where
         + Sub<Output = T>
         + Neg<Output = T>
         + std::cmp::PartialEq
-        + std::cmp::Ord
+        + std::cmp::PartialOrd
         + std::fmt::Debug,
     U: Copy
         + Clone
@@ -24,6 +24,7 @@ where
         + Sub<Output = U>
         + Neg<Output = U>
         + std::cmp::PartialEq
+        + std::cmp::PartialOrd
         + std::fmt::Debug,
 {
     pub terms: Vec<Term<T, U>>,
@@ -39,7 +40,7 @@ where
         + Sub<Output = T>
         + Neg<Output = T>
         + std::cmp::PartialEq
-        + std::cmp::Ord
+        + std::cmp::PartialOrd
         + std::fmt::Debug,
 {
     fn from(coefficients: Vec<T>) -> Self {
