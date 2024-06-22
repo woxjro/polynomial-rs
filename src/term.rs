@@ -1,44 +1,14 @@
-use std::ops::{Add, Div, Mul, Neg, Sub};
+use std::ops::{Add, Div, Mul, Sub};
 #[derive(Debug, Clone, Copy, PartialEq)]
-pub struct Term<T, U = i32>
-where
-    T: Copy
-        + Clone
-        + Add<Output = T>
-        + Mul<Output = T>
-        + Div<Output = T>
-        + Sub<Output = T>
-        + Neg<Output = T>
-        + std::cmp::PartialEq
-        + std::cmp::PartialOrd
-        + std::fmt::Debug,
-    U: Copy
-        + Clone
-        + Add<Output = U>
-        + Mul<Output = U>
-        + Div<Output = U>
-        + Sub<Output = U>
-        + Neg<Output = U>
-        + std::cmp::PartialEq
-        + std::cmp::PartialOrd
-        + std::fmt::Debug,
-{
+pub struct Term<T, U> {
     pub coefficient: T,
     pub degree: U,
 }
 
-impl<T> Add for Term<T>
+impl<T, U> Add for Term<T, U>
 where
-    T: Copy
-        + Clone
-        + Add<Output = T>
-        + Mul<Output = T>
-        + Div<Output = T>
-        + Sub<Output = T>
-        + Neg<Output = T>
-        + std::cmp::PartialEq
-        + std::cmp::PartialOrd
-        + std::fmt::Debug,
+    T: Add<Output = T> + std::cmp::PartialEq + std::fmt::Debug,
+    U: Add<Output = U> + std::cmp::PartialEq + std::fmt::Debug,
 {
     type Output = Self;
 
@@ -54,18 +24,10 @@ where
     }
 }
 
-impl<T> Sub for Term<T>
+impl<T, U> Sub for Term<T, U>
 where
-    T: Copy
-        + Clone
-        + Add<Output = T>
-        + Mul<Output = T>
-        + Div<Output = T>
-        + Sub<Output = T>
-        + Neg<Output = T>
-        + std::cmp::PartialEq
-        + std::cmp::PartialOrd
-        + std::fmt::Debug,
+    T: Sub<Output = T> + std::cmp::PartialEq + std::fmt::Debug,
+    U: Sub<Output = U> + std::cmp::PartialEq + std::fmt::Debug,
 {
     type Output = Self;
 
@@ -81,18 +43,10 @@ where
     }
 }
 
-impl<T> Mul for Term<T>
+impl<T, U> Mul for Term<T, U>
 where
-    T: Copy
-        + Clone
-        + Add<Output = T>
-        + Mul<Output = T>
-        + Div<Output = T>
-        + Sub<Output = T>
-        + Neg<Output = T>
-        + std::cmp::PartialEq
-        + std::cmp::PartialOrd
-        + std::fmt::Debug,
+    T: Add<Output = T> + Mul<Output = T> + std::cmp::PartialEq + std::fmt::Debug,
+    U: Add<Output = U> + Mul<Output = U> + std::cmp::PartialEq + std::fmt::Debug,
 {
     type Output = Self;
 
@@ -104,18 +58,10 @@ where
     }
 }
 
-impl<T> Div for Term<T>
+impl<T, U> Div for Term<T, U>
 where
-    T: Copy
-        + Clone
-        + Add<Output = T>
-        + Mul<Output = T>
-        + Div<Output = T>
-        + Sub<Output = T>
-        + Neg<Output = T>
-        + std::cmp::PartialEq
-        + std::cmp::PartialOrd
-        + std::fmt::Debug,
+    T: Sub<Output = T> + Div<Output = T> + std::cmp::PartialEq + std::fmt::Debug,
+    U: Sub<Output = U> + Div<Output = U> + std::cmp::PartialEq + std::fmt::Debug,
 {
     type Output = Self;
 
@@ -127,7 +73,7 @@ where
     }
 }
 
-impl std::fmt::Display for Term<i32> {
+impl std::fmt::Display for Term<i32, i32> {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         let s = if self.degree == 0 {
             if self.coefficient == 1 {
