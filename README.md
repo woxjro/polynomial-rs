@@ -21,7 +21,7 @@ fn main() {
     // x - 1
     let rhs = Polynomial::from(vec![1, -1]);
 
-    // x^2 -1x + 2
+    // x^2 -x + 2
     println!("{}", lhs - rhs);
 
     // multiplying two polynomials

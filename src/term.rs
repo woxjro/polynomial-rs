@@ -1,4 +1,6 @@
-use std::ops::{Add, Div, Mul, Sub};
+use num_traits::cast::NumCast;
+use num_traits::identities::{One, Zero};
+use std::ops::{Add, Div, Mul, Neg, Sub};
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Term<T, U> {
     pub coefficient: T,
@@ -73,20 +75,24 @@ where
     }
 }
 
-impl std::fmt::Display for Term<i32, i32> {
+impl<T, U> std::fmt::Display for Term<T, U>
+where
+    T: One + Neg + NumCast + PartialEq + std::fmt::Display,
+    U: Zero + One + PartialEq + std::fmt::Display,
+{
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        let s = if self.degree == 0 {
-            if self.coefficient == 1 {
+        let s = if self.degree.is_zero() {
+            if self.coefficient.is_one() {
                 "1".to_string()
-            } else if self.coefficient == -1 {
+            } else if self.coefficient == NumCast::from(-1).unwrap() {
                 "-1".to_string()
             } else {
                 format!("{}", self.coefficient)
             }
-        } else if self.degree == 1 {
-            if self.coefficient == 1 {
+        } else if self.degree.is_one() {
+            if self.coefficient.is_one() {
                 "x".to_string()
-            } else if self.coefficient == -1 {
+            } else if self.coefficient == NumCast::from(-1).unwrap() {
                 "-x".to_string()
             } else {
                 format!("{}x", self.coefficient)
@@ -94,9 +100,9 @@ impl std::fmt::Display for Term<i32, i32> {
         } else {
             format!(
                 "{}x^{}",
-                if self.coefficient == 1 {
+                if self.coefficient.is_one() {
                     "".to_string()
-                } else if self.coefficient == -1 {
+                } else if self.coefficient == NumCast::from(-1).unwrap() {
                     "-".to_string()
                 } else {
                     self.coefficient.to_string()
