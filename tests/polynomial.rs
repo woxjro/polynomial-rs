@@ -3,7 +3,7 @@ use polynomial_rs::polynomial::Polynomial;
 #[test]
 fn test_polynomial() {
     // x^2 + 2x + 3
-    let polynomial = Polynomial::from(vec![1, 2, 3]);
+    let polynomial: Polynomial<i32, u32> = Polynomial::from(vec![1, 2, 3]);
     println!("{}", polynomial);
     assert_eq!(polynomial.terms[0].coefficient, 1);
     assert_eq!(polynomial.terms[1].coefficient, 2);
@@ -17,10 +17,10 @@ fn test_polynomial() {
 #[test]
 fn test_polynomial_add() {
     //        x^2 + 2x + 3
-    let polynomial1 = Polynomial::from(vec![1, 2, 3]);
+    let polynomial1: Polynomial<i32, u32> = Polynomial::from(vec![1, 2, 3]);
     // x^3 + 2x^2 + 3x + 4
-    let polynomial2 = Polynomial::from(vec![1, 2, 3, 4]);
-    let polynomial3 = polynomial1 + polynomial2;
+    let polynomial2: Polynomial<i32, u32> = Polynomial::from(vec![1, 2, 3, 4]);
+    let polynomial3: Polynomial<i32, u32> = polynomial1 + polynomial2;
 
     assert_eq!(polynomial3.terms[0].coefficient, 1);
     assert_eq!(polynomial3.terms[1].coefficient, 3);
@@ -35,10 +35,10 @@ fn test_polynomial_add() {
 #[test]
 fn test_polynomial_sub() {
     //        x^2 + 2x + 3
-    let polynomial1 = Polynomial::from(vec![1, 2, 3]);
+    let polynomial1: Polynomial<i32, u32> = Polynomial::from(vec![1, 2, 3]);
     // x^3 + 2x^2 + 3x + 4
-    let polynomial2 = Polynomial::from(vec![1, 2, 3, 4]);
-    let polynomial3 = polynomial1 - polynomial2;
+    let polynomial2: Polynomial<i32, u32> = Polynomial::from(vec![1, 2, 3, 4]);
+    let polynomial3: Polynomial<i32, u32> = polynomial1 - polynomial2;
 
     println!("{}", polynomial3);
     assert_eq!(polynomial3.terms[0].coefficient, -1);
@@ -54,11 +54,11 @@ fn test_polynomial_sub() {
 #[test]
 fn test_polynomial_mul() {
     // x^1 + 2x^0
-    let polynomial1 = Polynomial::from(vec![1, 2]);
+    let polynomial1: Polynomial<i32, u32> = Polynomial::from(vec![1, 2]);
     // 3x^1 + 4x^0
-    let polynomial2 = Polynomial::from(vec![3, 4]);
+    let polynomial2: Polynomial<i32, u32> = Polynomial::from(vec![3, 4]);
     // 3x^2 + 10x^1 + 8x^0
-    let polynomial3 = polynomial1 * polynomial2;
+    let polynomial3: Polynomial<i32, u32> = polynomial1 * polynomial2;
 
     println!("{}", polynomial3);
     assert_eq!(polynomial3.terms[0].coefficient, 3);
